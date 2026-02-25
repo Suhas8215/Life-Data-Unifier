@@ -1,0 +1,84 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 2rem;
+  line-height: 1.4;
+  color: #111827;
+}
+
+main {
+  max-width: 800px;
+}
+
+.button {
+  display: inline-block;
+  background: #1d4ed8;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.55rem 0.9rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+}
+
+.status {
+  margin-top: 1rem;
+}
+
+.connected {
+  color: #166534;
+}
+
+.disconnected {
+  color: #9a3412;
+}
+
+.secondary {
+  background: #475569;
+}
+
+.warning {
+  background: #d97706;
+}
+
+.success {
+  background: #15803d;
+}
+
+.danger {
+  background: #b91c1c;
+}
+
+.small {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.meta {
+  color: #4b5563;
+  font-size: 0.92rem;
+}
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.card.overdue {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.action-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}

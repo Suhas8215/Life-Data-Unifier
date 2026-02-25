@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Life Data Unifier</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Life Data Unifier</h1>
+      <p>Local-first MVP scaffold is running.</p>
+      {% if google_connected %}
+      <p class="status connected">Google account connected.</p>
+      <p><a class="button secondary" href="/obligations">Open obligations dashboard</a></p>
+      <p><a class="button secondary" href="/responses">Open response candidates</a></p>
+      <form method="post" action="/scan?gmail_days=7&gcal_lookback_days=1&gcal_lookahead_days=7&gmail_limit=100&gcal_limit=100&message_limit_for_extraction=200">
+        <button class="button" type="submit">Run full scan (gmail 7d, gcal -1/+7d)</button>
+      </form>
+      {% else %}
+      <p class="status disconnected">Google account not connected yet.</p>
+      <p><a class="button" href="/auth/login">Connect Google</a></p>
+      {% endif %}
+      {% if scan_summary %}
+      <p class="status connected">Last scan summary: {{ scan_summary }}</p>
+      {% endif %}
+      <p class="meta">
+        Suggested flow: connect account -> run full scan -> open obligations dashboard.
+      </p>
+    </main>
+  </body>
+</html>
