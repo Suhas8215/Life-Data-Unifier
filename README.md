@@ -1,6 +1,6 @@
 # Life Data Unifier
 
-Local-first MVP to unify personal commitments from Gmail and Google Calendar.
+Local-first MVP to unify personal commitments from Gmail and Google Calendar. - work in progress(ml infra & rl)
 
 ## Run locally
 
