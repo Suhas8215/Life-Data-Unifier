@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Obligation</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Obligation Detail</h1>
+      <p><a href="/obligations">Back to dashboard</a></p>
+      <section class="card">
+        <p><strong>Action:</strong> {{ obligation.action }}</p>
+        <p><strong>Status:</strong> {{ obligation.status }}</p>
+        <p><strong>Evidence:</strong> {{ obligation.text_evidence }}</p>
+        <p><strong>Source:</strong> {{ obligation.source }} / {{ obligation.source_id }}</p>
+        <p><strong>Created:</strong> {{ obligation.created_at }}</p>
+        <p><strong>Time window start:</strong> {{ obligation.time_window_start or "N/A" }}</p>
+        <p><strong>Time window end:</strong> {{ obligation.time_window_end or "N/A" }}</p>
+        <p><strong>Confidence:</strong> {{ obligation.confidence }}</p>
+        {% if obligation.source_url %}
+        <p><a href="{{ obligation.source_url }}" target="_blank">Open source item</a></p>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>Actions</h2>
+        <div class="action-row">
+          <form method="post" action="/obligations/{{ obligation.id }}/status?status=done&next_path=/obligations/{{ obligation.id }}">
+            <button class="button small success" type="submit">Mark done</button>
+          </form>
+          <form method="post" action="/obligations/{{ obligation.id }}/status?status=dismissed&next_path=/obligations/{{ obligation.id }}">
+            <button class="button small danger" type="submit">Dismiss</button>
+          </form>
+          <form method="post" action="/obligations/{{ obligation.id }}/status?status=snoozed&next_path=/obligations/{{ obligation.id }}">
+            <button class="button small warning" type="submit">Snooze</button>
+          </form>
+          <form method="post" action="/obligations/{{ obligation.id }}/status?status=pending&next_path=/obligations/{{ obligation.id }}">
+            <button class="button small secondary" type="submit">Set pending</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

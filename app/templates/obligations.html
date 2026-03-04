@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Obligations</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Obligations</h1>
+      {% if scan_summary %}
+      <p class="status connected">Scan summary: {{ scan_summary }}</p>
+      {% endif %}
+      <p>Total obligations: {{ all_count }}</p>
+      <p><a href="/">Back home</a></p>
+      <p>
+        {% if include_routine %}
+        <a href="/obligations">Hide routine classes/events</a>
+        {% else %}
+        <a href="/obligations?include_routine=1">Include routine classes/events</a>
+        {% endif %}
+      </p>
+
+      <section>
+        <h2>Upcoming events (next 7 days)</h2>
+        {% if upcoming_events %}
+        <ul class="cards">
+          {% for item in upcoming_events %}
+          <li class="card">
+            <p><strong>{{ item.summary or "Untitled event" }}</strong></p>
+            <p class="meta">Start: {{ item.start_time }} | End: {{ item.end_time }}</p>
+            {% if item.description %}
+            <p>{{ item.description }}</p>
+            {% endif %}
+            {% if item.html_link %}
+            <p><a href="{{ item.html_link }}" target="_blank">Open in Google Calendar</a></p>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No upcoming events in this view.</p>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>Overdue</h2>
+        {% if overdue %}
+        <ul class="cards">
+          {% for item in overdue %}
+          <li class="card overdue">
+            <p><strong>{{ item.action }}</strong></p>
+            <p>{{ item.text_evidence }}</p>
+            <p class="meta">Due by: {{ item.time_window_end }}</p>
+            <p>
+              <a href="/obligations/{{ item.id }}">Open detail</a>
+              {% if item.source_url %} | <a href="{{ item.source_url }}" target="_blank">Open source</a>{% endif %}
+            </p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No overdue obligations.</p>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>Suggested follow-ups</h2>
+        {% if suggested_followups %}
+        <ul class="cards">
+          {% for item in suggested_followups %}
+          <li class="card">
+            <p><strong>{{ item.action }}</strong></p>
+            <p>{{ item.text_evidence }}</p>
+            <p class="meta">Created: {{ item.created_at }}</p>
+            <p><a href="/obligations/{{ item.id }}">Open detail</a></p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No suggested follow-ups.</p>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>Pending commitments</h2>
+        {% if pending %}
+        <ul class="cards">
+          {% for item in pending %}
+          <li class="card">
+            <p><strong>{{ item.action }}</strong></p>
+            <p>{{ item.text_evidence }}</p>
+            <p class="meta">Source: {{ item.source }} | Confidence: {{ item.confidence }}</p>
+            <p><a href="/obligations/{{ item.id }}">Open detail</a></p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No pending commitments yet.</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
